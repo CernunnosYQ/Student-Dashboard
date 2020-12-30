@@ -1,0 +1,182 @@
+:root {
+  --background: #3f3f3f;
+  --background-dark: #2f2f2f;
+  --background-light: #afafaf;
+  --filosofia: #FFEE58;
+  --algebra: #42A5F5;
+  --ingles: white;
+  --historia: black;
+  --dp: white;
+  --dhp: black;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.c-imposter {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: var(--background-light);
+}
+
+.c-container {
+  width: 85%;
+  padding: 1em;
+
+  border-radius: 8px;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, .5);
+
+  background: var(--background);
+}
+
+.c-schedule {
+  display: grid;
+  grid-template-columns: [cols-start] 1fr [monday] 2fr [tuesday] 2fr [wednesday] 2fr [thursday] 2fr [friday] 2fr [weekend];
+  grid-template-rows: [_rows-start] 1fr [_7hrs] 2fr [_8hrs] 2fr [_9hrs] 2fr [_10] 2fr [_11hrs] 2fr [_12hrs] 2fr [_13hrs] 2fr [_14hrs];
+  grid-gap: .5em;
+}
+
+.c-schedule__item {
+  background: var(--background-dark);
+  color: white;
+
+  min-height: 1.5em;
+
+  border-radius: 4px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, .5);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.c-schedule__header--row {
+  grid-column-start: row-headers;
+}
+
+/* ==== Columns      ======== */
+
+.from-cols-start {
+  grid-column-start: cols-start;
+}
+
+.from-monday {
+  grid-column-start: monday;
+}
+
+.to-monday {
+  grid-column-end: monday;
+}
+
+.from-tuesday {
+  grid-column-start: tuesday;
+}
+
+.to-tuesday {
+  grid-column-end: tuesday;
+}
+
+.from-wednesday {
+  grid-column-start: wednesday;
+}
+
+.to-wednesday {
+  grid-column-end: wednesday;
+}
+
+.from-thursday {
+  grid-column-start: thursday;
+}
+
+.to-thursday {
+  grid-column-end: thursday;
+}
+
+.from-friday {
+  grid-column-start: friday;
+}
+
+.to-friday {
+  grid-column-end: friday;
+}
+
+.to-weekend {
+  grid-column-end: weekend;
+}
+
+/* ==== Rows         ======== */
+
+.from-rows-start {
+  grid-row-start: _rows-start;
+}
+
+.from-7hrs {
+  grid-row-start: _7hrs;
+}
+
+.to-7hrs {
+  grid-row-end: _7hrs;
+}
+
+.from-8hrs {
+  grid-row-start: _8hrs;
+}
+
+.to-8hrs {
+  grid-row-end: _8hrs;
+}
+
+.from-9hrs {
+  grid-row-start: _9hrs;
+}
+
+.to-9hrs {
+  grid-row-end: _9hrs;
+}
+
+.from-10 {
+  grid-row-start: _10;
+}
+
+.to-10 {
+  grid-row-end: _10;
+}
+
+.from-11hrs {
+  grid-row-start: _11hrs;
+}
+
+.to-11hrs {
+  grid-row-end: _11hrs;
+}
+
+.from-12hrs {
+  grid-row-start: _12hrs;
+}
+
+.to-12hrs {
+  grid-row-end: _12hrs;
+}
+
+.from-13hrs {
+  grid-row-start: _13hrs;
+}
+
+.to-13hrs {
+  grid-row-end: _13hrs;
+}
+
+.to-14hrs {
+  grid-row-end: _14hrs;
+}
+
