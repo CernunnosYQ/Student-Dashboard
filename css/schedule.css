@@ -1,13 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
 :root {
   --background: #3f3f3f;
   --background-dark: #2f2f2f;
   --background-light: #afafaf;
-  --filosofia: #FFEE58;
+  
   --algebra: #42A5F5;
-  --ingles: white;
-  --historia: black;
-  --dp: white;
-  --dhp: black;
+  --eoe: #FFEE58;
+  --dhp: #ef5350;
+  --dp: #9CCC65;
+  --philosophy: #26A69A;
+  --computing: #7E57C2;
+  --orientation: #EC407A;
+  --english: #26C6DA;
+  --history: #A1887F;
 }
 
 * {
@@ -17,6 +23,7 @@
 body {
   margin: 0;
   padding: 0;
+  font-family: 'Share Tech Mono', monospace
 }
 
 .c-imposter {
@@ -42,7 +49,7 @@ body {
 .c-schedule {
   display: grid;
   grid-template-columns: [cols-start] 1fr [monday] 2fr [tuesday] 2fr [wednesday] 2fr [thursday] 2fr [friday] 2fr [weekend];
-  grid-template-rows: [_rows-start] 1fr [_7hrs] 2fr [_8hrs] 2fr [_9hrs] 2fr [_10] 2fr [_11hrs] 2fr [_12hrs] 2fr [_13hrs] 2fr [_14hrs];
+  grid-template-rows: [_rows-start] 1fr [_7hrs] 2fr [_8hrs] 2fr [_9hrs] 2fr [_10hrs] 2fr [_11hrs] 2fr [_12hrs] 2fr [_13hrs] 2fr [_14hrs];
   grid-gap: .5em;
 }
 
@@ -61,10 +68,120 @@ body {
 }
 
 .c-schedule__header--row {
-  grid-column-start: row-headers;
+  grid-column-start: cols-start;
 }
 
-/* ==== Columns      ======== */
+/* ==== block subjects ==== */
+
+.subject {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+
+  z-index: 200;
+
+  transition: transform .3s, box-shadow .3s;
+  transition-delay: .1s;
+}
+
+.subject:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 8px 8px 8px rgba(0, 0, 0, .5);
+  z-index: 500;
+}
+
+.subject:active {
+  transition-delay: 0s;
+  transform: none;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, .5);
+}
+
+.subject span {
+  color:black;
+  font-size: 1.1em;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, .3);
+}
+
+.subject span::selection {
+  background: none;
+  color: black;
+}
+
+.subject i {
+  position: absolute;
+  right: .2em;
+  bottom: -.2em;
+
+  color: rgba(0, 0, 0, .3);
+  font-size: 3em;
+}
+
+.subject--algebra {
+  background: var(--algebra);
+}
+
+.subject--algebra i {
+  right: .3em;
+  font-size: 3em;
+  transform: rotate(-30deg);
+}
+
+.subject--eoe {
+  background: var(--eoe);
+}
+
+.subject--eoe i {
+  bottom: -.1em;
+}
+
+.subject--dhp {
+  background: var(--dhp);
+}
+
+.subject--dhp i {
+  transform: rotate(-30deg);
+}
+
+.subject--dp {
+  background: var(--dp);
+}
+
+.subject--philosophy {
+  background: var(--philosophy);
+}
+
+.subject--computing {
+  background: var(--computing);
+}
+
+.subject--computing i {
+  transform: rotate(-30deg);
+}
+
+.subject--orientation {
+  background: var(--orientation);
+}
+
+.subject--english {
+  background: var(--english);
+}
+
+.subject--english i {
+  transform: rotate(-30deg);
+}
+
+.subject--history {
+  background: var(--history);
+}
+
+.subject--history i {
+  bottom: -.1em;
+  font-size: 3em;
+}
+
+/* ==== end block ==== */
+
+/* ==== block columns ==== */
 
 .from-cols-start {
   grid-column-start: cols-start;
@@ -114,7 +231,9 @@ body {
   grid-column-end: weekend;
 }
 
-/* ==== Rows         ======== */
+/* ==== end block ==== */
+
+/* ==== block rows ==== */
 
 .from-rows-start {
   grid-row-start: _rows-start;
@@ -144,12 +263,12 @@ body {
   grid-row-end: _9hrs;
 }
 
-.from-10 {
-  grid-row-start: _10;
+.from-10hrs {
+  grid-row-start: _10hrs;
 }
 
-.to-10 {
-  grid-row-end: _10;
+.to-10hrs {
+  grid-row-end: _10hrs;
 }
 
 .from-11hrs {
@@ -180,3 +299,4 @@ body {
   grid-row-end: _14hrs;
 }
 
+/* ==== end block ==== */

@@ -3,7 +3,23 @@ import os
 from string import Template
 
 
-def process_grid(path):
+def process_grid(path: str):
+    ''' Function that write the classes for css grid
+
+    The function require a css file with: 
+
+        -   The columns and/or rows named in the "grid-template-columns" and/or
+            the "grid-template-rows" propertys of the grid.
+
+        -   A block to write the classes for the columns and another for the rows
+            delimited for two comment lines:
+                +   start:      /* ==== block [columns/rows] ==== */
+                +   end:        /* ==== end block ==== */
+
+    Note:   If there is code inside the block, the function will remplace all the
+            content of the block.
+
+    '''
     tmp_path = path + '.tmp'
 
     if not os.path.exists(path):
@@ -17,36 +33,100 @@ def process_grid(path):
     os.rename(tmp_path, path)
 
 
-def insert_classes(path, columns, rows):
-    tmp_path = path + '.tmp'
-    open(tmp_path, 'w').close()
+def get_headers(path: str):
+    ''' Search the headers of the grid.
 
-    cols_sec_id = '/* ==== Columns'
-    rows_sec_id = '/* ==== Rows'
+    Search the property grid-template-columns and grid-template-rows, then take the
+    arguments and search for the arguments that start with "[" and ends with "]"
 
+    '''
     with open(path, 'r') as file:
+        columns = []
+        rows = []
+
         line = file.readline()
 
         while line:
-            with open(tmp_path, 'a') as tmp_file:
-                tmp_file.write(line)
+            # -2 to avoid the '\n' at the end of line
+            keywords = line[:-2].split()
 
-            clean_line = unindent_line(line)
+            if keywords:
+                if keywords[0] == 'grid-template-columns:':
+                    for k in keywords[1:]:
+                        if (k[0] == '[' and k[-1] == ']'):
+                            columns.append(k[1:-1])
+                    print(columns)
 
-            if clean_line[:len(cols_sec_id)] == cols_sec_id:
+                if keywords[0] == 'grid-template-rows:':
+                    for k in keywords[1:]:
+                        if (k[0] == '[' and k[-1] == ']'):
+                            rows.append(k[1:-1])
+                    print(rows)
+
+            if columns != [] and rows != []:
+                break
+
+            line = file.readline()
+        else:
+            if columns == [] and rows == []:
+                raise SyntaxError('No header detected')
+
+    return columns, rows
+
+
+def insert_classes(path: str, columns: list, rows: list):
+    ''' Re-write the file
+
+    Writes line by line the file in a temp file avoiding to write the content of the
+    "block columns" and/or "block rows" and writing instead the classes created by
+    the function.
+
+    '''
+    tmp_path = path + '.tmp'
+    open(tmp_path, 'w').close()
+
+    cols_block_id = '/* ==== block columns'
+    rows_block_id = '/* ==== block rows'
+
+    end_block_id = '/* ==== end block'
+
+    with open(path, 'r') as file:
+        line = file.readline()
+        writing = True
+
+        while line:
+            if writing:
+                with open(tmp_path, 'a') as tmp_file:
+                    tmp_file.write(line)
+
+            keywords = line[:-2].split()
+
+            if ' '.join(keywords[:4]) == cols_block_id:
+                writing = False
                 if columns != []:
                     write_classes('column', columns, tmp_path)
 
-            if clean_line[:len(rows_sec_id)] == rows_sec_id:
+            if ' '.join(keywords[:4]) == rows_block_id:
+                writing = False
                 if rows != []:
                     write_classes('row', rows, tmp_path, numeric_start=True)
 
-            line = file.readline()
+            if ' '.join(keywords[:4]) == end_block_id and not writing:
+                writing = True
+            else:
+                line = file.readline()
 
     return True
 
 
-def write_classes(type, headers, path, numeric_start=False):
+def write_classes(type: str, headers: list, path: str, numeric_start: bool = False):
+    ''' Write the classes in the file
+
+    Recive as arguments the type ["col"/"row"], the headers as a list, the path for
+    the file and an optional argument to indicate if the headers name has an one
+    character prefix used for names that starts with a number
+
+    '''
     tpl_start = Template(
         '\n.from-$suffix {\n  grid-$type-start: $header_name;\n}\n')
     tpl_end = Template('\n.to-$suffix {\n  grid-$type-end: $header_name;\n}\n')
@@ -66,58 +146,7 @@ def write_classes(type, headers, path, numeric_start=False):
                 file.write(tpl_end.substitute(
                     suffix=suffix, header_name=h, type=type))
 
-
-def get_headers(path):
-    with open(path, 'r') as file:
-        line = file.readline()
-        clean_line = ''
-
-        columns = []
-        rows = []
-
-        while line:
-            clean_line = unindent_line(line)
-
-            if clean_line[:22] == 'grid-template-columns:':
-                # -2 to avoid the '\n' at the end
-                columns = extract_headers(clean_line[22:-2])
-                print(columns)
-
-            if clean_line[:19] == 'grid-template-rows:':
-                # -2 to avoid the '\n' at the end
-                rows = extract_headers(clean_line[19:-2])
-                print(rows)
-
-            if columns != [] and rows != []:
-                break
-
-            line = file.readline()
-        else:
-            if columns == [] and rows == []:
-                raise SyntaxError('No header detected')
-
-    return columns, rows
-
-
-def extract_headers(line):
-    headers_tmp = line.split()
-    headers = []
-
-    for h in headers_tmp:
-        if h[0] == '[' and h[-1] == ']':
-            headers.append(h[1:-1])
-
-    return headers
-
-
-def unindent_line(line):
-    clean_line = ''
-    for i in range(len(line)):
-        if not (line[i] == ' '):
-            clean_line = line[i:]
-            break
-
-    return clean_line
+        file.write('\n')
 
 
 if __name__ == "__main__":

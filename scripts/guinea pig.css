@@ -58,7 +58,7 @@ body {
   grid-column-start: row-headers;
 }
 
-/* ==== Columns      ======== */
+/* ==== block columns  ======== */
 
 .from-cols-start {
   grid-column-start: cols-start;
@@ -108,7 +108,9 @@ body {
   grid-column-end: weekend;
 }
 
-/* ==== Rows     ======== */
+/* ==== end block      ======== */
+
+/* ==== block rows     ======== */
 
 .from-rows-start {
   grid-row-start: _rows-start;
@@ -174,3 +176,4 @@ body {
   grid-row-end: _14;
 }
 
+/* ==== end block      ======== */
