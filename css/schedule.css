@@ -29,35 +29,38 @@ body {
 .l-imposter {
   width: 100vw;
   height: 100vh;
-
+  
   display: flex;
-
+  
   justify-content: center;
   align-items: center;
-
+  
   background: var(--background-light);
 }
 
 .l-container {
   height: 100%;
   width: 100%;
-
+  
   padding: .5em;
-
+  
   box-shadow: 4px 4px 8px rgba(0, 0, 0, .5);
-
+  
   background: var(--background);
 }
 
 .c-schedule {
+  --i: 2;
+  --distance: calc(var(--i) * (-100% - 0.5rem));
+  
   width: 100%;
   height: 100%;
   
   display: grid;
-
+  
   grid-template-columns: [cols-start] 1fr [nested] 3fr [cols-end];
   grid-template-rows: [_rows-start] 1fr [_7hrs] 2fr [_8hrs] 2fr [_9hrs] 2fr [_10hrs] 2fr [_11hrs] 2fr [_12hrs] 2fr [_13hrs] 2fr [_14hrs];
-
+  
   grid-gap: .5em;
 }
 
@@ -65,14 +68,14 @@ body {
   background: var(--background-dark);
   color: white;
   cursor: default;
-
+  
   margin: 4px;
-
+  
   min-height: 1.5em;
-
+  
   border-radius: 4px;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, .5);
-
+  
   display: flex;
   justify-content: center;
   align-items: center;
@@ -90,52 +93,25 @@ body {
 /* ==== block nested ==== */
 
 .c-schedule__nested-container {
-  --i: 2;
-  --distance: calc(var(--i) * (-100% - 0.5rem));
-
   grid-row-start: _rows-start;
   grid-row-end: _14hrs;
-
+  
   overflow: hidden;
 }
 
 .c-schedule__nested {
   width: 100%;
   height: 100%;
-
+  
   display: grid;
-
+  
   grid-template-rows: [_rows-start] 1fr [_7hrs] 2fr [_8hrs] 2fr [_9hrs] 2fr [_10hrs] 2fr [_11hrs] 2fr [_12hrs] 2fr [_13hrs] 2fr [_14hrs];
   grid-template-columns: [monday] 100% [tuesday] 100% [wednesday] 100% [thursday] 100% [friday] 100% [weekend];
-
+  
   grid-gap: .5em;
-
-  transform: translate(var(--distance))
-}
-
-/* ==== end block ==== */
-
-/* ==== block controls == */
-
-.c-schedule__controls {
-  position: absolute;
-  z-index: 10000;
-
-  height: 100vh;
-
-  padding: 1em;
-
-  top: 0;
-
-  opacity: 15%;
-}
-
-.c-schedule__controls--right {
-  right: 0;
-}
-
-.c-schedule__controls--left {
-  left: 0;
+  
+  transition: transform .5s ease-in-out;
+  transform: translate(var(--distance));
 }
 
 /* ==== end block ==== */
@@ -147,8 +123,10 @@ body {
   overflow: hidden;
   cursor: pointer;
 
+  font-size: 24px;
+  
   z-index: 200;
-
+  
   transition: transform .3s, box-shadow .3s;
   transition-delay: .1s;
 }
@@ -168,7 +146,6 @@ body {
 .c-subject span {
   color:black;
   text-align: center;
-  font-size: 1.1em;
   text-shadow: 1px 1px 2px rgba(255, 255, 255, .3);
 }
 
@@ -181,7 +158,7 @@ body {
   position: absolute;
   right: .2em;
   bottom: -.2em;
-
+  
   color: rgba(0, 0, 0, .3);
   font-size: 3em;
 }
@@ -257,33 +234,77 @@ body {
   .l-container {
     height: 100%;
     width: 100%;
-
+    
     font-size: 12px;
-
+    
     border-radius: 0;
-
+    
     padding: .5em;
   }
   
   .c-schedule {
     grid-template-columns: [cols-start] 1fr [nested] 10fr [cols-end];
   }
-
+  
+  .c-schedule__nested-container {
+    padding-left: 4px;
+  }
+  
   .c-schedule__nested {
+    width: calc(100% - 4px);
     grid-template-columns: [monday] 2fr [tuesday] 2fr [wednesday] 2fr [thursday] 2fr [friday] 2fr [weekend];
     transform: none;
   }
-
-  .c-schedule__controls {
-    display: none;
+  
+  .c-schedule__item {
+    margin: 0;
   }
+
+  .c-subject {
+    font-size: 16px;
+  }
+
+  .h-merge {
+    display: none !important;
+  }
+  
+  /* ==== block columns ==== */
+  
+  .from-cols-start {
+    grid-column-start: cols-start;
+  }
+  
+  .to-monday {
+    grid-column-end: monday;
+  }
+  
+  .to-tuesday {
+    grid-column-end: tuesday;
+  }
+  
+  .to-wednesday {
+    grid-column-end: wednesday;
+  }
+  
+  .to-thursday {
+    grid-column-end: thursday;
+  }
+  .to-friday {
+    grid-column-end: friday;
+  }
+  
+  .to-weekend {
+    grid-column-end: weekend;
+  }
+  
+  /* ==== end block ==== */
 }
 
-@media (min-width: 576px) {
+@media (min-width: 576px) and (orientation: portrait) {
   .l-container {
     width: 540px;
     height: calc(100% - 2em);
-
+    
     border-radius: .5em;
     box-shadow: 4px 4px 8px rgba(0, 0, 0, .5);
   }
@@ -291,9 +312,14 @@ body {
 
 @media (min-width: 768px) {
   .l-container {
-    width: 720px;
     font-size: 14px;
-  
+  }
+}
+
+@media (min-width: 768px) and (orientation: portrait) {
+  .l-container {
+    width: 720px;
+    
     border-radius: 8px;
   }
 }
@@ -301,6 +327,12 @@ body {
 @media (min-width: 992px) {
   .l-container {
     width: 960px;
+    height: calc(100% - 2em);
+    
+    font-size: 16px;
+    
+    border-radius: .5em;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, .5);
   }
 }
 
@@ -314,52 +346,24 @@ body {
 
 /* ==== block columns ==== */
 
-.from-cols-start {
-  grid-column-start: cols-start;
-}
-
 .from-monday {
   grid-column-start: monday;
-}
-
-.to-monday {
-  grid-column-end: monday;
 }
 
 .from-tuesday {
   grid-column-start: tuesday;
 }
 
-.to-tuesday {
-  grid-column-end: tuesday;
-}
-
 .from-wednesday {
   grid-column-start: wednesday;
-}
-
-.to-wednesday {
-  grid-column-end: wednesday;
 }
 
 .from-thursday {
   grid-column-start: thursday;
 }
 
-.to-thursday {
-  grid-column-end: thursday;
-}
-
 .from-friday {
   grid-column-start: friday;
-}
-
-.to-friday {
-  grid-column-end: friday;
-}
-
-.to-weekend {
-  grid-column-end: weekend;
 }
 
 /* ==== end block ==== */

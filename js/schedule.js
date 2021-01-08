@@ -1,21 +1,31 @@
-const _C = document.querySelector('.c-schedule__nested-container');
-const _next = document.getElementById('next'),
-  _prev = document.getElementById('prev');
-
-_next.addEventListener('click', next);
-_prev.addEventListener('click', previous);
+const _C = document.querySelector('.c-schedule');
 
 let i = 0;
-_C.style.setProperty('--i', i);
+let x0 = null;
 
-function next() {
-  if (i < 4) {
-    _C.style.setProperty('--i', i += 1)
-  }
-}
+_C.style.setProperty('--i', i)
 
-function previous() {
-  if (i > 0) {
-    _C.style.setProperty('--i', i -= 1)
+function lock(e) {
+  x0 = e.changedTouches[0].clientX;
+};
+
+function move(e) {
+  if (x0) {
+    let dx = e.changedTouches[0].clientX - x0;
+
+    if (Math.abs(dx) >= 50) {
+      s = Math.sign(dx);
+
+      if ((i > 0 || s < 0) && (i < 4 || s > 0))
+        _C.style.setProperty('--i', i -= s);
+    }
+
+    x0 = null;
   }
-}
+};
+
+_C.addEventListener('touchstart', lock, false);
+
+_C.addEventListener('touchend', move, false);
+
+_C.addEventListener('touchmove', e => { e.preventDefault() }, false)
