@@ -11,118 +11,142 @@
 </head>
 
 <body>
-  <div class="c-imposter">
-    <div class="c-container">
+  <div class="l-imposter">
+    <div class="l-container">
       <div class="c-schedule">
+
+        <!-- block row headers -->
         <div class="c-schedule__item c-schedule__header--column">
           <span></span>
         </div>
-        <div class="c-schedule__item c-schedule__header--column">
-          <span>Lunes</span>
-        </div>
-        <div class="c-schedule__item c-schedule__header--column">
-          <span>Martes</span>
-        </div>
-        <div class="c-schedule__item c-schedule__header--column">
-          <span>Miercoles</span>
-        </div>
-        <div class="c-schedule__item c-schedule__header--column">
-          <span>Jueves</span>
-        </div>
-        <div class="c-schedule__item c-schedule__header--column">
-          <span>Viernes</span>
-        </div>
-        <div class="c-schedule__item c-schedule__header--row">
+        <div class="c-schedule__item c-schedule__header--row from-7hrs">
           <span>7:00 <br> 8:00</span>
         </div>
-        <div class="c-schedule__item c-schedule__header--row">
+        <div class="c-schedule__item c-schedule__header--row from-8hrs">
           <span>8:00 <br> 9:00</span>
         </div>
-        <div class="c-schedule__item c-schedule__header--row">
+        <div class="c-schedule__item c-schedule__header--row from-9hrs">
           <span>&nbsp9:00 <br> 10:00</span>
         </div>
-        <div class="c-schedule__item c-schedule__header--row">
+        <div class="c-schedule__item c-schedule__header--row from-10hrs">
           <span>10:00 <br> 11:00</span>
         </div>
-        <div class="c-schedule__item c-schedule__header--row">
+        <div class="c-schedule__item c-schedule__header--row from-11hrs">
           <span>11:00 <br> 12:00</span>
         </div>
-        <div class="c-schedule__item c-schedule__header--row">
+        <div class="c-schedule__item c-schedule__header--row from-12hrs">
           <span>12:00 <br> 13:00</span>
         </div>
-        <div class="c-schedule__item c-schedule__header--row">
+        <div class="c-schedule__item c-schedule__header--row from-13hrs">
           <span>13:00 <br> 14:00</span>
         </div>
 
-        <!--    block lessons    -->
+        <!-- block days -->
+        <div class="c-schedule__nested-container">
+          <div class="c-schedule__nested">
 
-        <div class="c-schedule__item subject subject--algebra from-monday to-friday from-8hrs">
-          <i class="fas fa-square-root-alt"></i><span>Algebra</span>
+            <!-- block column headers -->
+            <div class="c-schedule__item c-schedule__header--column from-monday">
+              <span>Lunes</span>
+            </div>
+            <div class="c-schedule__item c-schedule__header--column from-tuesday">
+              <span>Martes</span>
+            </div>
+            <div class="c-schedule__item c-schedule__header--column from-wednesday">
+              <span>Miercoles</span>
+            </div>
+            <div class="c-schedule__item c-schedule__header--column from-thursday">
+              <span>Jueves</span>
+            </div>
+            <div class="c-schedule__item c-schedule__header--column from-friday">
+              <span>Viernes</span>
+            </div>
+
+            <!-- block Algebra -->
+            <div class="c-schedule__item c-subject c-subject--algebra from-monday to-friday from-8hrs">
+              <i class="fas fa-square-root-alt"></i><span>Algebra</span>
+            </div>
+
+            <!-- block Filosofía -->
+            <div class="c-schedule__item c-subject c-subject--philosophy from-friday from-7hrs to-9hrs">
+              <i class="fas fa-book-reader"></i><span>Filosofía</span>
+            </div>
+
+            <!-- block Orientación -->
+            <div class="c-schedule__item c-subject c-subject--orientation from-monday from-9hrs">
+              <i class="fas fa-compass"></i><span>Orientación</span>
+            </div>
+
+            <div class="c-schedule__item c-subject c-subject--orientation from-friday from-9hrs">
+              <i class="fas fa-compass"></i><span>Orientación</span>
+            </div>
+
+            <!-- block Computación -->
+            <div class="c-schedule__item c-subject c-subject--computing from-tuesday from-9hrs">
+              <i class="fas fa-laptop-code"></i><span>Computación</span>
+            </div>
+
+            <div class="c-schedule__item c-subject c-subject--computing from-thursday from-9hrs to-11hrs">
+              <i class="fas fa-laptop-code"></i><span>Computación Básica</span>
+            </div>
+
+            <!-- block Desarrollo Personal -->
+            <div class="c-schedule__item c-subject c-subject--dp from-wednesday from-9hrs to-11hrs">
+              <i class="fas fa-seedling"></i><span>Desarrollo Personal</span>
+            </div>
+
+            <div class="c-schedule__item c-subject c-subject--dp from-tuesday from-10hrs">
+              <i class="fas fa-seedling"></i><span>Desarrollo Personal</span>
+            </div>
+
+            <!-- block DHP -->
+            <div class="c-schedule__item c-subject c-subject--dhp from-monday from-10hrs">
+              <i class="fas fa-puzzle-piece"></i><span>DHP</span>
+            </div>
+
+            <div class="c-schedule__item c-subject c-subject--dhp from-friday from-10hrs">
+              <i class="fas fa-puzzle-piece"></i><span>DHP</span>
+            </div>
+
+            <!-- block Expresión Oral y E -->
+            <div class="c-schedule__item c-subject c-subject--eoe from-tuesday to-friday from-11hrs">
+              <i class="fas fa-feather"></i><span>Expresión Oral y E</span>
+            </div>
+
+            <!-- block Historia -->
+            <div class="c-schedule__item c-subject c-subject--history from-monday from-12hrs">
+              <i class="fas fa-mosque"></i><span>Historia</span>
+            </div>
+
+            <div class="c-schedule__item c-subject c-subject--history from-friday from-12hrs">
+              <i class="fas fa-mosque"></i><span>Historia</span>
+            </div>
+
+            <!-- block Inglés -->
+            <div class="c-schedule__item c-subject c-subject--english from-tuesday from-12hrs">
+              <i class="fas fa-language"></i><span>Inglés</span>
+            </div>
+
+            <div class="c-schedule__item c-subject c-subject--english from-wednesday from-13hrs">
+              <i class="fas fa-language"></i><span>Inglés</span>
+            </div>
+
+            <div class="c-schedule__item c-subject c-subject--english from-thursday from-12hrs to-14hrs">
+              <i class="fas fa-language"></i><span>Inglés</span>
+            </div>
+          </div>
         </div>
 
-        <div class="c-schedule__item subject subject--philosophy from-friday from-7hrs to-9hrs">
-          <i class="fas fa-book"></i><span>Filosofía</span>
-        </div>
-
-        <div class="c-schedule__item subject subject--orientation from-monday from-9hrs">
-          <i class="fas fa-compass"></i><span>Orientación</span>
-        </div>
-
-        <div class="c-schedule__item subject subject--computing from-tuesday from-9hrs">
-          <i class="fas fa-laptop-code"></i><span>Computación</span>
-        </div>
-
-        <div class="c-schedule__item subject subject--dp from-wednesday from-9hrs to-11hrs">
-          <i class="fas fa-seedling"></i><span>Desarrollo Personal</span>
-        </div>
-
-        <div class="c-schedule__item subject subject--computing from-thursday from-9hrs to-11hrs">
-          <i class="fas fa-laptop-code"></i><span>Computación Básica</span>
-        </div>
-
-        <div class="c-schedule__item subject subject--orientation from-friday from-9hrs">
-          <i class="fas fa-compass"></i><span>Orientación</span>
-        </div>
-
-        <div class="c-schedule__item subject subject--dhp from-monday from-10hrs">
-          <i class="fas fa-puzzle-piece"></i><span>DHP</span>
-        </div>
-
-        <div class="c-schedule__item subject subject--dp from-tuesday from-10hrs">
-          <i class="fas fa-seedling"></i><span>Desarrollo Personal</span>
-        </div>
-
-        <div class="c-schedule__item subject subject--dhp from-friday from-10hrs">
-          <i class="fas fa-puzzle-piece"></i><span>DHP</span>
-        </div>
-
-        <div class="c-schedule__item subject subject--eoe from-tuesday to-friday from-11hrs">
-          <i class="fas fa-feather"></i><span>Expresión Oral y E</span>
-        </div>
-
-        <div class="c-schedule__item subject subject--history from-monday from-12hrs">
-          <i class="fas fa-mosque"></i><span>Historia</span>
-        </div>
-
-        <div class="c-schedule__item subject subject--history from-friday from-12hrs">
-          <i class="fas fa-mosque"></i><span>Historia</span>
-        </div>
-
-        <div class="c-schedule__item subject subject--english from-tuesday from-12hrs">
-          <i class="fas fa-language"></i><span>Inglés</span>
-        </div>
-
-        <div class="c-schedule__item subject subject--english from-wednesday from-13hrs">
-          <i class="fas fa-language"></i><span>Inglés</span>
-        </div>
-
-        <div class="c-schedule__item subject subject--english from-thursday from-12hrs to-14hrs">
-          <i class="fas fa-language"></i><span>Inglés</span>
-        </div>
-
+        <!-- block controls -->
+        <button class="c-schedule__controls c-schedule__controls--left" id="prev"><i class="fas fa-arrow-left"></i>
+        </button>
+        <button class="c-schedule__controls c-schedule__controls--right" id="next"><i class="fas fa-arrow-right"></i>
+        </button>
       </div>
     </div>
   </div>
+
+  <script src="js/schedule.js"></script>
 </body>
 
 </html>

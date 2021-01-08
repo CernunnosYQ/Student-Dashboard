@@ -26,36 +26,47 @@ body {
   font-family: 'Share Tech Mono', monospace
 }
 
-.c-imposter {
+.l-imposter {
   width: 100vw;
   height: 100vh;
+
   display: flex;
+
   justify-content: center;
   align-items: center;
 
   background: var(--background-light);
 }
 
-.c-container {
-  width: 85%;
-  padding: 1em;
+.l-container {
+  height: 100%;
+  width: 100%;
 
-  border-radius: 8px;
+  padding: .5em;
+
   box-shadow: 4px 4px 8px rgba(0, 0, 0, .5);
 
   background: var(--background);
 }
 
 .c-schedule {
+  width: 100%;
+  height: 100%;
+  
   display: grid;
-  grid-template-columns: [cols-start] 1fr [monday] 2fr [tuesday] 2fr [wednesday] 2fr [thursday] 2fr [friday] 2fr [weekend];
+
+  grid-template-columns: [cols-start] 1fr [nested] 3fr [cols-end];
   grid-template-rows: [_rows-start] 1fr [_7hrs] 2fr [_8hrs] 2fr [_9hrs] 2fr [_10hrs] 2fr [_11hrs] 2fr [_12hrs] 2fr [_13hrs] 2fr [_14hrs];
+
   grid-gap: .5em;
 }
 
 .c-schedule__item {
   background: var(--background-dark);
   color: white;
+  cursor: default;
+
+  margin: 4px;
 
   min-height: 1.5em;
 
@@ -67,13 +78,71 @@ body {
   align-items: center;
 }
 
+.c-schedule__item span::selection {
+  background: none;
+  color: white;
+}
+
 .c-schedule__header--row {
   grid-column-start: cols-start;
 }
 
+/* ==== block nested ==== */
+
+.c-schedule__nested-container {
+  --i: 2;
+  --distance: calc(var(--i) * (-100% - 0.5rem));
+
+  grid-row-start: _rows-start;
+  grid-row-end: _14hrs;
+
+  overflow: hidden;
+}
+
+.c-schedule__nested {
+  width: 100%;
+  height: 100%;
+
+  display: grid;
+
+  grid-template-rows: [_rows-start] 1fr [_7hrs] 2fr [_8hrs] 2fr [_9hrs] 2fr [_10hrs] 2fr [_11hrs] 2fr [_12hrs] 2fr [_13hrs] 2fr [_14hrs];
+  grid-template-columns: [monday] 100% [tuesday] 100% [wednesday] 100% [thursday] 100% [friday] 100% [weekend];
+
+  grid-gap: .5em;
+
+  transform: translate(var(--distance))
+}
+
+/* ==== end block ==== */
+
+/* ==== block controls == */
+
+.c-schedule__controls {
+  position: absolute;
+  z-index: 10000;
+
+  height: 100vh;
+
+  padding: 1em;
+
+  top: 0;
+
+  opacity: 15%;
+}
+
+.c-schedule__controls--right {
+  right: 0;
+}
+
+.c-schedule__controls--left {
+  left: 0;
+}
+
+/* ==== end block ==== */
+
 /* ==== block subjects ==== */
 
-.subject {
+.c-subject {
   position: relative;
   overflow: hidden;
   cursor: pointer;
@@ -84,30 +153,31 @@ body {
   transition-delay: .1s;
 }
 
-.subject:hover {
+.c-subject:hover {
   transform: translate(-4px, -4px);
   box-shadow: 8px 8px 8px rgba(0, 0, 0, .5);
   z-index: 500;
 }
 
-.subject:active {
+.c-subject:active {
   transition-delay: 0s;
   transform: none;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, .5);
 }
 
-.subject span {
+.c-subject span {
   color:black;
+  text-align: center;
   font-size: 1.1em;
   text-shadow: 1px 1px 2px rgba(255, 255, 255, .3);
 }
 
-.subject span::selection {
+.c-subject span::selection {
   background: none;
   color: black;
 }
 
-.subject i {
+.c-subject i {
   position: absolute;
   right: .2em;
   bottom: -.2em;
@@ -116,67 +186,128 @@ body {
   font-size: 3em;
 }
 
-.subject--algebra {
+.c-subject--algebra {
   background: var(--algebra);
 }
 
-.subject--algebra i {
+.c-subject--algebra i {
   right: .3em;
   font-size: 3em;
   transform: rotate(-30deg);
 }
 
-.subject--eoe {
+.c-subject--eoe {
   background: var(--eoe);
 }
 
-.subject--eoe i {
+.c-subject--eoe i {
   bottom: -.1em;
 }
 
-.subject--dhp {
+.c-subject--dhp {
   background: var(--dhp);
 }
 
-.subject--dhp i {
+.c-subject--dhp i {
   transform: rotate(-30deg);
 }
 
-.subject--dp {
+.c-subject--dp {
   background: var(--dp);
 }
 
-.subject--philosophy {
+.c-subject--philosophy {
   background: var(--philosophy);
 }
 
-.subject--computing {
+.c-subject--computing {
   background: var(--computing);
 }
 
-.subject--computing i {
+.c-subject--computing i {
   transform: rotate(-30deg);
 }
 
-.subject--orientation {
+.c-subject--orientation {
   background: var(--orientation);
 }
 
-.subject--english {
+.c-subject--english {
   background: var(--english);
 }
 
-.subject--english i {
+.c-subject--english i {
   transform: rotate(-30deg);
 }
 
-.subject--history {
+.c-subject--history {
   background: var(--history);
 }
 
-.subject--history i {
+.c-subject--history i {
   bottom: -.1em;
   font-size: 3em;
+}
+
+/* ==== end block ==== */
+
+/* ==== block tablet ==== */
+
+@media (orientation: landscape) {
+  .l-container {
+    height: 100%;
+    width: 100%;
+
+    font-size: 12px;
+
+    border-radius: 0;
+
+    padding: .5em;
+  }
+  
+  .c-schedule {
+    grid-template-columns: [cols-start] 1fr [nested] 10fr [cols-end];
+  }
+
+  .c-schedule__nested {
+    grid-template-columns: [monday] 2fr [tuesday] 2fr [wednesday] 2fr [thursday] 2fr [friday] 2fr [weekend];
+    transform: none;
+  }
+
+  .c-schedule__controls {
+    display: none;
+  }
+}
+
+@media (min-width: 576px) {
+  .l-container {
+    width: 540px;
+    height: calc(100% - 2em);
+
+    border-radius: .5em;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, .5);
+  }
+}
+
+@media (min-width: 768px) {
+  .l-container {
+    width: 720px;
+    font-size: 14px;
+  
+    border-radius: 8px;
+  }
+}
+
+@media (min-width: 992px) {
+  .l-container {
+    width: 960px;
+  }
+}
+
+@media (min-width: 1240px) {
+  .l-container {
+    width: 1200px;
+  }
 }
 
 /* ==== end block ==== */
