@@ -27,5 +27,3 @@ function move(e) {
 _C.addEventListener('touchstart', lock, false);
 
 _C.addEventListener('touchend', move, false);
-
-_C.addEventListener('touchmove', e => { e.preventDefault() }, false)
