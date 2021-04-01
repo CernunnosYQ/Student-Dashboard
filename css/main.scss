@@ -1,0 +1,20 @@
+@import 'button';
+@import 'layout/imposter.scss';
+
+.l-lala {
+  color: green;
+}
+
+.form {
+  &__label {
+    color: red;
+  }
+
+  &__input {
+    outline: none;
+
+    &--error {
+      border-color: red;
+    }
+  }
+}

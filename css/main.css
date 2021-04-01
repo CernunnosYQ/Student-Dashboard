@@ -1,0 +1,27 @@
+.button__red {
+  background: red;
+}
+.button__blue {
+  background: blue;
+}
+
+.l-imposter {
+  width: 100vw;
+  height: 100vh;
+}
+
+.l-lala {
+  color: green;
+}
+
+.form__label {
+  color: red;
+}
+.form__input {
+  outline: none;
+}
+.form__input--error {
+  border-color: red;
+}
+
+/*# sourceMappingURL=main.css.map */
